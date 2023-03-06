@@ -13,7 +13,8 @@ class User {       // The class
     void isAuth(string Username, string Password); //Function (bool function which will authenticate user login)
     void Delete();
     void create();
-    void refund();
+    void refundRequest();
+    void refundReply();
 };
 
 class product
@@ -43,7 +44,8 @@ public:
    float getPrice(){return itemPrice;};
    string getitemdescrtiption(){return itemDescription;};
    int getProductStock(){return product_stock;};
-   void refund(itemName, itemPrice;);
+   void refundRequest(itemName, itemPrice;);
+   void refundReply(itemName, itemPrice;);
 
 };
 
@@ -74,7 +76,7 @@ public:
 //Refund function
 // Should allow a buyer to request a refund from a seller based on an item they already purchased.
 
-void product:: refund()
+void product:: refundRequest()
 {
   cout << "Would you like to get a refund? (Yes: 1 , No: 2)" << endl;
   cin >> userinput;
@@ -116,6 +118,32 @@ void product:: refund()
   {
     cout << "Refund request cancelled." << endl;
     // how do we return to main menu?
+  }
+  // If the user entered an invalid option, display an error message.
+  else
+  {
+    cout << "Invalid option. Please try again." << endl;
+  }
+}
+
+// Refund reply function, used for sellers to accept or deny refund requests.
+// TODO: Store refund request somehow (not sure how to display it)
+void product:: refundReply
+{
+  cout << "Will you accept the refund request? (Yes: 1, No: 2)" << endl;
+  cin << userinput;
+
+  // If the user accepts the refund request, the refund transaction happens.
+  if(userinput == 1)
+  {
+    //AddCredit method or something here
+    
+    cout << "Refund transaction successful." << endl;
+  }
+  // If the user denies the refund request, the transaction does not happen.
+  else if(userinput == 2)
+  {
+    cout << "Refund request denied." << endl;
   }
   // If the user entered an invalid option, display an error message.
   else
