@@ -126,7 +126,6 @@ class Bid{
 
 };
 
-
 //TODO: create a method which is able to authenticate user and what type of user has logged in.
 void User::isAuth(string Username, string Password) {
   cout << "User is authenticated"<< endl;
@@ -161,24 +160,6 @@ void Bid::makebid(string name){
       }
     }  
 }
-}
-//TODO: receive command from user and perform the transaction commands
-void Transaction::doCommand(int command) {
-  for (int i = 0; i < 4; i++) {
-      if(command-1 == i){
-            cout <<"You have selected: " <<commands[i]<<endl;
-            //TODO: Call a function to do the subsequent command picked.
-        }else{
-          if(command-1 == 4){
-             cout <<"You have decided to logout. Goodbye."<<endl;
-
-          }
-        }
-  
-  }
-//TODO: Display Bid Status for an item placed by user. User will login and navigate to item and check bid status on that item
-//TODO: receive command from user and perform the transaction commands
- 
 }
  
 int main()
