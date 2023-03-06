@@ -13,6 +13,7 @@ class User {       // The class
     void isAuth(string Username, string Password); //Function (bool function which will authenticate user login)
     void Delete();
     void create();
+    void refund();
 };
 
 class product
@@ -42,6 +43,7 @@ public:
    float getPrice(){return itemPrice;};
    string getitemdescrtiption(){return itemDescription;};
    int getProductStock(){return product_stock;};
+   void refund(itemName, itemPrice;);
 
 };
 
@@ -58,8 +60,6 @@ public:
   cin >> itemDescription;
   product_stock++;
  
-
-
 }
  void product:: showitem()
 {
@@ -71,11 +71,58 @@ public:
 
 }
 
+//Refund function
+
+void product:: refund()
+{
+  cout << "Would you like to get a refund? (Yes: 1 , No: 2)" << endl;
+  cin >> userinput;
+  
+  // If the user chooses to refund something, ask for an input for the name of the item.
+  if(userinput == 1)
+  {
+    cout << "Please enter the name of the item you want a refund for:" << endl;
+    cin >> userinput;
+
+    // Refund amount should be the same as the price of the item
+    cout << "Refund issued for " << itemName << ", at the price of $" << bidPrice << "." << endl;
+
+    // Ask the user to confirm the refund
+    cout << "Confirm: 1 , Cancel: 2" << endl;
+    cin >> userinput;
+
+    // If the user confirms the refund, then the transaction happens.
+    if(userinput == 1)
+    {
+
+    }
+    // If the user cancels the refundm send them back to the previous menu.
+    else if(userinput == 2)
+    {
+
+    }
+    // If the user entered an invalid option, display an error message.
+    else
+    {
+      cout << "Invalid option. Please try again." << endl;
+    }
+  }
+  // If the user does not want to refund, send them back to the previous menu.
+  else if(userinput == 2)
+  {
+
+  }
+  // If the user entered an invalid option, display an error message.
+  else
+  {
+    cout << "Invalid option. Please try again." << endl;
+  }
+}
+
 class Bid{
   public:
   float min_bid;
   void makebid(string name);
-
 
 };
 
@@ -89,7 +136,7 @@ void User::create(){}
 //TODO: Be able to delete User by deleting user objects.
 void User::Delete(){}
 void Bid::makebid(string name){
-  
+
   product item;
   float bid;
   while (name != "n"){
@@ -103,7 +150,7 @@ void Bid::makebid(string name){
         cout <<"Bid is greater than previous highest bid. Bid is successful"<<endl;
         // Swap previous highest bid for item with new bid
         item.itemPrice = bid;
-        
+
         //Update Quantity of Item
         item.product_stock-=1;
       }
@@ -112,17 +159,27 @@ void Bid::makebid(string name){
       if(name != item.itemName){
         cout <<"No such product exists in database"<<endl;
       }
-    }
-
-    
-  }
-  
-
-  
+    }  
 }
+}
+//TODO: receive command from user and perform the transaction commands
+void Transaction::doCommand(int command) {
+  for (int i = 0; i < 4; i++) {
+      if(command-1 == i){
+            cout <<"You have selected: " <<commands[i]<<endl;
+            //TODO: Call a function to do the subsequent command picked.
+        }else{
+          if(command-1 == 4){
+             cout <<"You have decided to logout. Goodbye."<<endl;
+
+          }
+        }
+  
+  }
 //TODO: Display Bid Status for an item placed by user. User will login and navigate to item and check bid status on that item
 //TODO: receive command from user and perform the transaction commands
-
+ 
+}
  
 int main()
 {
@@ -172,7 +229,8 @@ int main()
 
     }
     // Perform commands inputed by user
-    
+    item.doCommand(userinput);
+   
     // switch(userinput) {
     //   case 1:
     //     while (true){
@@ -194,7 +252,7 @@ int main()
     //     cin >> bidname;
     //     Bid b;
     //     b.makebid(bidname); 
-   
+
     // }
 
     return 0;
