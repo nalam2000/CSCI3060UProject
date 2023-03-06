@@ -72,6 +72,7 @@ public:
 }
 
 //Refund function
+// Should allow a buyer to request a refund from a seller based on an item they already purchased.
 
 void product:: refund()
 {
@@ -84,6 +85,8 @@ void product:: refund()
     cout << "Please enter the name of the item you want a refund for:" << endl;
     cin >> userinput;
 
+    //TODO: Make sure the item is already in the user's inventory
+
     // Refund amount should be the same as the price of the item
     cout << "Refund issued for " << itemName << ", at the price of $" << bidPrice << "." << endl;
 
@@ -91,15 +94,16 @@ void product:: refund()
     cout << "Confirm: 1 , Cancel: 2" << endl;
     cin >> userinput;
 
-    // If the user confirms the refund, then the transaction happens.
+    // If the user confirms the refund, then the refund request happens.
     if(userinput == 1)
     {
-
+      cout << "Refund request completed!" << endl;
     }
     // If the user cancels the refundm send them back to the previous menu.
     else if(userinput == 2)
     {
-
+      cout << "Refund request cancelled." << endl;
+      // how do we return to main menu?
     }
     // If the user entered an invalid option, display an error message.
     else
@@ -110,7 +114,8 @@ void product:: refund()
   // If the user does not want to refund, send them back to the previous menu.
   else if(userinput == 2)
   {
-
+    cout << "Refund request cancelled." << endl;
+    // how do we return to main menu?
   }
   // If the user entered an invalid option, display an error message.
   else
