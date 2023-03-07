@@ -23,6 +23,8 @@ private:
     void readItems(const std::string& filename);
     void processTransaction(const std::string& transaction);
     void processTransactions(const std::string& filename);
+    void AddCredit(const std::string& username);
+   
 };
 
 #endif

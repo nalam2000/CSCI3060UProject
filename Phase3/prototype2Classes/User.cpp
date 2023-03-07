@@ -50,6 +50,17 @@ public:
             cout << "Password changed successfully" << endl;
         }
     }
+         void AddCredit(string username,unordered_map<string, User> &users ){
+            double amount;
+         if (users.find(username) != users.end()){
+            cout << "Enter Amount: ";
+            cin >> amount;
+            cout << "Amount added.";
+
+
+         }
+
+    }
     
     // Read user accounts from a file and store them in an unordered_map
     static unordered_map<string, User> readUsers(string filename) {
@@ -64,4 +75,5 @@ public:
         inFile.close();
         return users;
     }
+  
 };

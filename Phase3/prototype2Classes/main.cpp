@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include "AuctionSystem.h"
+#include "item.h"
+#include "Account.h"
 
 int main(int argc, char* argv[]) {
     if (argc != 4) {
@@ -9,6 +11,9 @@ int main(int argc, char* argv[]) {
     }
 
     AuctionSystem auctionSystem(argv[1], argv[2], argv[3]);
+    item item;
+    double credit;
+    
 
     std::string username, password;
     std::cout << "Please enter your username: ";
@@ -36,7 +41,51 @@ int main(int argc, char* argv[]) {
                 std::cout << "Enter new password: ";
                 getline(std::cin, newPassword);
                 auctionSystem.changePassword(username, newPassword);
+            }else if(action == "bid"){
+                std::string bidname;
+                std::cout << "Enter the item name you would like to bid on(type n to exit): " <<endl;
+                std::cin >> bidname;
+                item.makebid(bidname); 
+
             }
+              
+            else if (action == "advertise"){
+            while (true){
+                item.createitem();
+                string input;
+                cout << "Would you like to continue?"<<endl;
+                cin >> input;
+                if (input == "n"){
+                    item.showitem();
+                    break;
+                }else{
+                    if (input == "y"){
+                    continue;
+                    }
+                }
+            }
+        }   else if(action == "addCredit"){
+                  
+                  double amount;
+                  cout << "Enter the amount of credits you would like ";
+                  cout << "to add to your account" << endl;
+                  cin >> amount;
+
+                  
+
+                 if (amount > 10000) {
+                    cout << "Error: Credit amount exceeds limit of $1000.00" << endl;
+                    return;
+                }
+
+                credit += amount;
+                
+                
+    
+                
+
+            }  
+            
             else if (action == "quit") {
                 break;
             }

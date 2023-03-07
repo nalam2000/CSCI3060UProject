@@ -11,6 +11,7 @@ private:
     unordered_map<string, int> accounts;
     vector<string> items;
     unordered_map<string, string> userAccounts;
+    double credit;
 
 public:
     AuctionSystem() {}
@@ -84,4 +85,5 @@ public:
         }
         inFile.close();
     }
+ 
 };

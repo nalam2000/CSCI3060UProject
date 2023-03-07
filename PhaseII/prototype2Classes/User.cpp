@@ -9,6 +9,7 @@ class User {
 private:
     string username;
     string password;
+  
     
 public:
     User(string uname, string pass): username(uname), password(pass) {}
@@ -64,4 +65,10 @@ public:
         inFile.close();
         return users;
     }
+    void User::addCredit();
+  
 };
+  
+
+ 
+

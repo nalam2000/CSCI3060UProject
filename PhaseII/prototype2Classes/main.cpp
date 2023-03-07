@@ -1,6 +1,11 @@
 #include <iostream>
 #include <string>
 #include "AuctionSystem.h"
+#include "item.h"
+#include "user.cpp"
+
+
+
 
 int main(int argc, char* argv[]) {
     if (argc != 4) {
@@ -9,6 +14,8 @@ int main(int argc, char* argv[]) {
     }
 
     AuctionSystem auctionSystem(argv[1], argv[2], argv[3]);
+    item item;
+   
 
     std::string username, password;
     std::cout << "Please enter your username: ";
@@ -37,9 +44,38 @@ int main(int argc, char* argv[]) {
                 getline(std::cin, newPassword);
                 auctionSystem.changePassword(username, newPassword);
             }
-            else if (action == "quit") {
+            else if(action == "bid"){
+                std::string bidname;
+                std::cout << "Enter the item name you would like to bid on(type n to exit): " <<endl;
+                std::cin >> bidname;
+                item.makebid(bidname); 
+
+            }
+              
+            else if (action == "advertise"){
+            while (true){
+                item.createitem();
+                string input;
+                cout << "Would you like to continue?"<<endl;
+                cin >> input;
+                if (input == "n"){
+                    item.showitem();
+                    break;
+                }else{
+                    if (input == "y"){
+                    continue;
+                    }
+                }
+            }
+        }   else if(action == "addCredit"){
+                
+
+            }       
+
+            else if (action == "Logout") {
                 break;
             }
+           
             else {
                 std::cout << "Invalid action" << std::endl;
             }
