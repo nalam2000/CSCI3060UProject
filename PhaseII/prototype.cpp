@@ -139,6 +139,8 @@ void product:: refundReply
     //AddCredit method or something here
     
     cout << "Refund transaction successful." << endl;
+
+    // TODO: ADD THIS TRANSACTION TO THE DAILY OUTPUT FILE
   }
   // If the user denies the refund request, the transaction does not happen.
   else if(userinput == 2)
