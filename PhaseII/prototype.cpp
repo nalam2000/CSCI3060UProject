@@ -44,8 +44,8 @@ public:
    float getPrice(){return itemPrice;};
    string getitemdescrtiption(){return itemDescription;};
    int getProductStock(){return product_stock;};
-   void refundRequest(itemName, itemPrice;);
-   void refundReply(itemName, itemPrice;);
+   void refundRequest(string itemName);
+   void refundReply(string itemName);
 
 };
 
@@ -76,8 +76,10 @@ public:
 //Refund function
 // Should allow a buyer to request a refund from a seller based on an item they already purchased.
 
-void product:: refundRequest()
+void product:: refundRequest(string itemName)
 {
+  product item;
+  int userinput;
   cout << "Would you like to get a refund? (Yes: 1 , No: 2)" << endl;
   cin >> userinput;
   
@@ -88,9 +90,8 @@ void product:: refundRequest()
     cin >> userinput;
 
     //TODO: Make sure the item is already in the user's inventory
-
-    // Refund amount should be the same as the price of the item
-    cout << "Refund issued for " << itemName << ", at the price of $" << bidPrice << "." << endl;
+    if (itemName == item.itemName){
+         cout << "Refund issued for " << item.itemName << ", at the price of $" << item.itemPrice << "." << endl;
 
     // Ask the user to confirm the refund
     cout << "Confirm: 1 , Cancel: 2" << endl;
@@ -112,6 +113,10 @@ void product:: refundRequest()
     {
       cout << "Invalid option. Please try again." << endl;
     }
+
+    }
+    // Refund amount should be the same as the price of the item
+ 
   }
   // If the user does not want to refund, send them back to the previous menu.
   else if(userinput == 2)
@@ -128,38 +133,34 @@ void product:: refundRequest()
 
 // Refund reply function, used for sellers to accept or deny refund requests.
 // TODO: Store refund request somehow (not sure how to display it)
-void product:: refundReply
-{
-  cout << "Will you accept the refund request? (Yes: 1, No: 2)" << endl;
-  cin << userinput;
+// void product:: refundReply(string itemName)
+// {
+//   int userinput;
+//   cout << "Will you accept the refund request? (Yes: 1, No: 2)" << endl;
+//   cin >> userinput;
 
-  // If the user accepts the refund request, the refund transaction happens.
-  if(userinput == 1)
-  {
-    //AddCredit method or something here
+//   // If the user accepts the refund request, the refund transaction happens.
+//   if(userinput == 1)
+//   {
+//     //AddCredit method or something here
     
-    cout << "Refund transaction successful." << endl;
+//     cout << "Refund transaction successful." << endl;
 
-    // TODO: ADD THIS TRANSACTION TO THE DAILY OUTPUT FILE
-  }
-  // If the user denies the refund request, the transaction does not happen.
-  else if(userinput == 2)
-  {
-    cout << "Refund request denied." << endl;
-  }
-  // If the user entered an invalid option, display an error message.
-  else
-  {
-    cout << "Invalid option. Please try again." << endl;
-  }
-}
+//     // TODO: ADD THIS TRANSACTION TO THE DAILY OUTPUT FILE
+//   }
+//   // If the user denies the refund request, the transaction does not happen.
+//   else if(userinput == 2)
+//   {
+//     cout << "Refund request denied." << endl;
+//   }
+//   // If the user entered an invalid option, display an error message.
+//   else
+//   {
+//     cout << "Invalid option. Please try again." << endl;
+//   }
+// }
 
-class Bid{
-  public:
-  float min_bid;
-  void makebid(string name);
 
-};
 
 //TODO: create a method which is able to authenticate user and what type of user has logged in.
 void User::isAuth(string Username, string Password) {
@@ -169,7 +170,8 @@ void User::isAuth(string Username, string Password) {
 void User::create(){}
 //TODO: Be able to delete User by deleting user objects.
 void User::Delete(){}
-void Bid::makebid(string name){
+void makebid(string name);
+void makebid(string name){
 
   product item;
   float bid;
@@ -223,8 +225,7 @@ int main()
     if (userinput == 1){
         cout << "Enter the item name you would like to bid on(type n to exit): " <<endl;
         cin >> bidname;
-        Bid b;
-        b.makebid(bidname); 
+        makebid(bidname); 
 
     }
     if (userinput == 2){
@@ -244,32 +245,13 @@ int main()
       }
 
     }
-    // Perform commands inputed by user
-    item.doCommand(userinput);
-   
-    // switch(userinput) {
-    //   case 1:
-    //     while (true){
-    //       item.createitem();
-    //       string input;
-    //       cout << "Would you like to continue?"<<endl;
-    //       cin >> input;
-    //       if (input == "n"){
-    //         item.showitem();
-    //         break;
-    //       }else{
-    //         if (input == "y"){
-    //           continue;
-    //         }
-    //       }
-    //   }
-    //   case 2: 
-    //     cout << "Enter the item name you would like to bid on(type n to exit): " <<endl;
-    //     cin >> bidname;
-    //     Bid b;
-    //     b.makebid(bidname); 
+    if (userinput == 3){
+      string input;
+      cout << "Enter the item name which you would like to request a refund for?"<<endl;
+      cin >> input;
+      item.refundRequest(input);
+    }
 
-    // }
 
     return 0;
 
