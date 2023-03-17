@@ -13,8 +13,7 @@ class User {       // The class
     void isAuth(string Username, string Password); //Function (bool function which will authenticate user login)
     void Delete();
     void create();
-    void refundRequest();
-    void refundReply();
+  
 };
 
 class product
