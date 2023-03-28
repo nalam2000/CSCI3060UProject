@@ -13,7 +13,6 @@ class addUserTest
     void addingUser()
     {
         var addedUser = new CurrentUserAccounts();              
-        addedUser.
     }
 
 }
