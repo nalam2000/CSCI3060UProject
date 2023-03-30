@@ -1,73 +1,143 @@
-
-/* This program has been designed so the CurrentAccounts file and AvailableItemsFile is parsed through, 
-   with the appropriate information is extracted from each file and is stored under a variable. This information
-   is then pushed to the daily transaction file. 
-   
-   Made by: Shane Francis, Noor Alam and Aqib Alam
-   
-   
-   */
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class Main {
+    static String filePath = "dailytransactions.txt";
+    static CurrentUserAccounts cu = new CurrentUserAccounts("currentusers.txt");
 
-    private static String username;
-    private static String accType;
-    private static double credits;
-    private static String seller;
-    private static String buyer;
-    private static String itemName;
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
 
-    public static void main(String[] args) {
-        // make objects which will be used to extract information from input files
-        CurrentUserAccounts userAccounts = new CurrentUserAccounts();
-        AvailableItemFile availableItems = new AvailableItemFile();
-
-        String inputFilePath = "availableitems.txt";
-        parseFile(inputFilePath);
-
-    }
-
-    private static void parseFile(String filePath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                // get Information from input file
-                String[] parts = line.split(",");
-
-                if (parts.length >= 6) {
-                    username = parts[0].trim();
-                    accType = parts[1].trim();
-                    credits = Double.parseDouble(parts[2].trim());
-                    seller = parts[3].trim();
-                    buyer = parts[4].trim();
-                    itemName = parts[5].trim();
-                }
-
-                // Store this in the daily Transaction file
-                writeToFile(username, accType, credits, seller, buyer, itemName);
+        String st;
+        while ((st = br.readLine()) != null) {
+            Transaction transaction = TransactionFactory.createTransaction(st, cu);
+            if (transaction != null) {
+                transaction.process();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
+}
 
-    // This function creates and writes to daily transaction file
-    private static void writeToFile(String username, String accType, double credits, String seller, String buyer,
-            String itemName) {
-        String outputFilePath = "dailytransactionfile.txt";
+abstract class Transaction {
+    String line;
+    CurrentUserAccounts cu;
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath, true))) {
-            String output = String.format("%s, %s, %.2f, %s, %s, %s%n", username, accType, credits, seller, buyer,
-                    itemName);
-            writer.write(output);
-        } catch (IOException e) {
-            e.printStackTrace();
+    public Transaction(String line, CurrentUserAccounts cu) {
+        this.line = line;
+        this.cu = cu;
+    }
+
+    abstract void process() throws Exception;
+}
+
+class AddTransaction extends Transaction {
+    public AddTransaction(String line, CurrentUserAccounts cu) {
+        super(line, cu);
+    }
+
+    @Override
+    void process() {
+        String username = line.substring(3, 18).trim();
+        String accType = line.substring(19, 21).trim();
+        float credits = Float.valueOf(line.substring(22, 31).trim());
+
+        cu.addUser(username, accType, credits);
+    }
+}
+
+class DeleteTransaction extends Transaction {
+    public DeleteTransaction(String line, CurrentUserAccounts cu) {
+        super(line, cu);
+    }
+
+    @Override
+    void process() {
+        String username = line.substring(3, 18).trim();
+
+        cu.deleteUser(username);
+    }
+}
+
+class Advertise extends Transaction {
+    public Advertise(String line, CurrentUserAccounts cu) {
+        super(line, cu);
+    }
+
+    @Override
+    void process() {
+        String itemName = line.substring(3, 22).trim();
+        String seller = line.substring(23, 36).trim();
+        String daysLeft = line.substring(37, 40).trim();
+        String startingBid = line.substring(42, 47).trim();
+
+        AvailableItemFile.advertise(itemName, seller, "", daysLeft, startingBid);
+    }
+}
+
+class Bid extends Transaction {
+    public Bid(String line, CurrentUserAccounts cu) {
+        super(line, cu);
+    }
+
+    @Override
+    void process() {
+        String itemName = line.substring(3, 22).trim();
+        String seller = line.substring(23, 38).trim();
+        String buyer = line.substring(39, 54).trim();
+        String cred = line.substring(54, 60).trim();
+
+        AvailableItemFile.bid(seller, itemName, buyer, cred);
+    }
+}
+
+class Refund extends Transaction {
+    public Refund(String line, CurrentUserAccounts cu) {
+        super(line, cu);
+    }
+
+    @Override
+    void process() {
+        String buyer = line.substring(3, 18).trim();
+        String seller = line.substring(19, 34).trim();
+        float credits = Float.valueOf(line.substring(34, 44).trim());
+
+        cu.refund(seller, buyer, credits);
+    }
+}
+
+class AddCredit extends Transaction {
+    public AddCredit(String line, CurrentUserAccounts cu) {
+        super(line, cu);
+    }
+
+    @Override
+    void process() {
+        String username = line.substring(3, 18).trim();
+        float credits = Float.valueOf(line.substring(22, 31).trim());
+
+        cu.addCredit(username, credits);
+    }
+}
+
+
+class TransactionFactory {
+    public static Transaction createTransaction(String line, CurrentUserAccounts cu) {
+        String transactionType = line.substring(0, 2);
+        switch (transactionType) {
+            case "01":
+                return new AddTransaction(line, cu);
+            case "02":
+                return new DeleteTransaction(line, cu);
+            case "03":
+                return new AdvertiseTransaction(line, cu);
+            case "04":
+                return new BidTransaction(line, cu);
+            case "05":
+                return new RefundTransaction(line, cu);
+            case "06":
+                return new AddCreditTransaction(line, cu);
+            default:
+                return null;
         }
     }
 }
