@@ -129,13 +129,13 @@ class TransactionFactory {
             case "02":
                 return new DeleteTransaction(line, cu);
             case "03":
-                return new AdvertiseTransaction(line, cu);
+                return new Advertise(line, cu);
             case "04":
-                return new BidTransaction(line, cu);
+                return new Bid(line, cu);
             case "05":
-                return new RefundTransaction(line, cu);
+                return new Refund(line, cu);
             case "06":
-                return new AddCreditTransaction(line, cu);
+                return new AddCredit(line, cu);
             default:
                 return null;
         }
