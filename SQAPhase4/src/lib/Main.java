@@ -64,7 +64,7 @@ class Advertise extends Transaction {
     }
 
     @Override
-    void process() {
+    void process() throws Exception {
         String itemName = line.substring(3, 22).trim();
         String seller = line.substring(23, 36).trim();
         String daysLeft = line.substring(37, 40).trim();
@@ -80,7 +80,7 @@ class Bid extends Transaction {
     }
 
     @Override
-    void process() {
+    void process() throws Exception {
         String itemName = line.substring(3, 22).trim();
         String seller = line.substring(23, 38).trim();
         String buyer = line.substring(39, 54).trim();
