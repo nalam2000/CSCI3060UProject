@@ -49,12 +49,66 @@ public class CurrentUserAccounts {
         return 0;
     }
 
-    public int addCredit(){
-        
+    public int addCredit(String username, float creditAmount){
+        try {
+            List<String[]> accountList = readAccountData();
+            List<String[]> updatedAccounts = new ArrayList<>();
+
+            for (String[] account : accountList) {
+                if (account[0].equals(username)) {
+                    float newCreditBalance = Float.parseFloat(account[2]) + creditAmount;
+                    if (newCreditBalance >= 1000000) {
+                        System.out.println("ERROR: User cannot have over 999999.99 credits");
+                        return -1;
+                    }
+                    account[2] = String.format("%09.2f", newCreditBalance);
+                }
+                updatedAccounts.add(account);
+            }
+            writeAccountData(updatedAccounts);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
         return 0;
     }
 
-    public int refund(){
+    public int refund(String sellerUsername, String buyerUsername, float refundAmount){
+        try {
+            List<String[]> accountList = readAccountData();
+            List<String[]> updatedAccounts = new ArrayList<>();
+            boolean sellerFound = false;
+            boolean buyerFound = false;
+    
+            for (String[] account : accountList) {
+                if (account[0].equals(buyerUsername)) {
+                    float newCreditBalance = Float.parseFloat(account[2]) + refundAmount;
+                    if (newCreditBalance >= 1000000) {
+                        System.out.println("ERROR: Buyer cannot have over 999999.99 credits");
+                        return -1;
+                    }
+                    account[2] = String.format("%09.2f", newCreditBalance);
+                    buyerFound = true;
+                } else if (account[0].equals(sellerUsername)) {
+                    float newCreditBalance = Float.parseFloat(account[2]) - refundAmount;
+                    if (newCreditBalance < 0) {
+                        System.out.println("ERROR: Seller cannot have negative credits");
+                        return -1;
+                    }
+                    account[2] = String.format("%09.2f", newCreditBalance);
+                    sellerFound = true;
+                }
+                updatedAccounts.add(account);
+            }
+            if (sellerFound && buyerFound) {
+                writeAccountData(updatedAccounts);
+            } else {
+                System.out.println("ERROR: Buyer and/or Seller not found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
         return 0;
     }
 
