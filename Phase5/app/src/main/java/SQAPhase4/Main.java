@@ -19,6 +19,7 @@ public class Main {
     }
 }
 
+// Abstract class which the other methods will inherit
 abstract class Transaction {
     String line;
     CurrentUserAccounts cu;
@@ -31,6 +32,7 @@ abstract class Transaction {
     abstract void process() throws Exception;
 }
 
+// This is for add user
 class AddTransaction extends Transaction {
     public AddTransaction(String line, CurrentUserAccounts cu) {
         super(line, cu);
@@ -46,6 +48,7 @@ class AddTransaction extends Transaction {
     }
 }
 
+// delete user
 class DeleteTransaction extends Transaction {
     public DeleteTransaction(String line, CurrentUserAccounts cu) {
         super(line, cu);
@@ -59,6 +62,7 @@ class DeleteTransaction extends Transaction {
     }
 }
 
+// advertise
 class Advertise extends Transaction {
     public Advertise(String line, CurrentUserAccounts cu) {
         super(line, cu);
