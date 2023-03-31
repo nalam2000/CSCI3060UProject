@@ -1,4 +1,6 @@
+package test;
 
+import lib.AvailableItemFile;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
@@ -65,7 +67,4 @@ public class AvailableItemFileTest {
         assertEquals("365", AvailableItemFile.formatDaysLeft("365"));
     }
 
-    @Test
-    public void testInvalidBid() {
-        assertThrows(Exception.class, () -> AvailableItemFile.bid("Seller1",
-
+}
