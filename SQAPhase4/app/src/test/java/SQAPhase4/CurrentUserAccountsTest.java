@@ -76,7 +76,7 @@ public class CurrentUserAccountsTest {
     // Path Coverage Tests 
      // Test case: Add credit to an existing user without exceeding the credit limit
     @Test
-    void testAddCreditUserExistsAndNotExceedLimit() {
+    void testAddCreditUserExists1() {
         // Add a user with an initial credit amount
         currentUserAccounts.addUser("testuser", "01", 5000.0f);
         // Attempt to add credit within the allowed limit
@@ -85,7 +85,7 @@ public class CurrentUserAccountsTest {
 
     // Test case: Add credit to an existing user, but exceed the credit limit
     @Test
-    void testAddCreditUserExistsAndExceedLimit() {
+    void testAddCreditUserExists2() {
         // Add a user with an initial credit amount close to the limit
         currentUserAccounts.addUser("testuser", "01", 995000.0f);
         // Attempt to add credit that would exceed the allowed limit
