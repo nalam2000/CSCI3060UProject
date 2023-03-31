@@ -9,10 +9,10 @@ import java.nio.file.Path;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // CurrentUserAccountsTest class
-public class CurrentUserAccounts {
+public class CurrentUserAccountsTest {
 
     // Instance variables to store the CurrentUserAccounts object and file path
-    private CurrentUserAccounts currentUserAccounts;
+    private CurrentUserAccountsTest currentUserAccounts;
     private String mainUserAccount;
 
     // This method is executed before each test case to set up the environment
