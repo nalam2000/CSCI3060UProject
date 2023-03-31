@@ -1,8 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+
 public class Main {
-    static String filePath = "dailytransactions.txt";
+    static String filePath = "SQAPhase4/dailytransactions.txt";
     static CurrentUserAccounts cu = new CurrentUserAccounts("currentusers.txt");
 
     public static void main(String[] args) throws Exception {
@@ -15,6 +16,7 @@ public class Main {
                 transaction.process();
             }
         }
+        
     }
 }
 
