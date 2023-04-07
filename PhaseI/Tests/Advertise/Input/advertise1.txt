@@ -1,0 +1,7 @@
+login
+fullUsername
+advertise
+Nintendo DS
+250.00
+50
+logout
