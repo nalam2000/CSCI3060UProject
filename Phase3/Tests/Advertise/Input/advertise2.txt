@@ -1,0 +1,7 @@
+login
+fullUsername
+advertise
+PS5
+250.00
+50
+logout
