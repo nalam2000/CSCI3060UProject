@@ -8,14 +8,14 @@ g++ $frontend/main.cpp
 : > availableitems.txt
 
 # set file content
-text="fullUsername    FS 001110.00
+text="Username    FS 001110.00
 buyUsername     BS 009999.99
 sellUsername    SS 000000.00
 adminUsername   AA 000050.00"
 echo "$text" > currentusers.txt
 
-text="basketball          someUs3r        fullUsername    010.00
-sneakers            exampleUsername someBidder      005.00"
+text="pockypack10x          User        Username    010.00
+socks            exampleUsername someBidder      005.00"
 echo "$text" > availableitems.txt
 
 # run the daily script 5 times
