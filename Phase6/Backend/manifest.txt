@@ -1,0 +1,1 @@
+Main-Class: app.src.main.java.SQAPhase4.Main
