@@ -45,3 +45,5 @@
 05 user01 user02 100
 07 user01 AA 2907 riateww
 01 user06 AA 0 teww
+03 name user01 29 0
+03 Basketball user01 29 0
