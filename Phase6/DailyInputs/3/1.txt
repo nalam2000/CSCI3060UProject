@@ -1,0 +1,7 @@
+login
+Username
+bid
+socks
+User
+30
+exit

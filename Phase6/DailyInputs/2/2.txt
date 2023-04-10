@@ -1,0 +1,7 @@
+login
+Username
+advertise
+PockyPack10x
+120.00
+100
+exit
