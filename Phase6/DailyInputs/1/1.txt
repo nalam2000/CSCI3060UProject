@@ -1,0 +1,6 @@
+login
+adminUsername
+addCredit
+Username
+5.00
+exit
