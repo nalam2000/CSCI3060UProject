@@ -1,5 +1,5 @@
 runFrontEnd="./FrontEnd1/a.out"
-transactions="./DailyScriptTransactions/$1"
+transactions="./DailyTransactions/$1"
 
 echo "$1"
 
