@@ -1,4 +1,4 @@
-runFrontEnd="./FrontEnd1/a.out"
+runFrontEnd="./FrontEnd1/main.o"
 transactions="./DailyTransactions/$1"
 
 echo "$1"
